@@ -1,0 +1,147 @@
+﻿@model IEnumerable<MyFirstWebsite.Models.StokDistributors>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index - Stok Distributor</h2>
+
+<p>
+    Distributor anda tidak ada?
+    @Html.ActionLink("Tambah Stok Distributor", "Create")
+</p>
+@using (Html.BeginForm())
+{
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistributorAssigns.Distributor_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Edited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time_Edited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Urea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SP36)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistributorAssigns.Aktif)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.StokDistributor_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistributorAssigns.Distributor_Id)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Edited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time_Edited)
+        </td>
+        @if(item.DistributorAssigns.Urea.Equals("1"))
+        { 
+            <td>
+                @Html.EditorFor(modelItem => item.Urea)
+                @Html.ValidationMessageFor(model => item.Urea)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Urea)
+            </td>            
+        }
+        @if(item.DistributorAssigns.NPK.Equals("1"))
+        {
+        <td>
+            @Html.EditorFor(modelItem => item.NPK)
+            @Html.ValidationMessageFor(model => item.NPK)
+        </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.NPK)
+            </td>
+        }
+        @if(item.DistributorAssigns.SP36.Equals("1"))
+        {
+        <td>
+            @Html.EditorFor(modelItem => item.SP36)
+            @Html.ValidationMessageFor(model => item.SP36)
+        </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.SP36)
+            </td>
+        }
+        @if(item.DistributorAssigns.ZA.Equals("1"))
+        {
+        <td>
+            @Html.EditorFor(modelItem => item.ZA)
+            @Html.ValidationMessageFor(model => item.ZA)
+        </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.ZA)
+            </td>
+        }
+        @if(item.DistributorAssigns.Organik.Equals("1"))
+        {
+        <td>
+            @Html.EditorFor(modelItem => item.Organik)
+            @Html.ValidationMessageFor(model => item.Organik)
+        </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Organik)
+            </td>
+        }
+        @if (item.DistributorAssigns.Aktif.Equals("1"))
+        {
+            <td>Aktif</td>
+        }
+        else
+        {
+            <td>Tidak Aktif</td>
+        }    
+      
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StokDistributor_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StokDistributor_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StokDistributor_Id })
+        </td>*@
+    </tr>
+}
+
+</table>
+<input type="submit" value="save" />
+}

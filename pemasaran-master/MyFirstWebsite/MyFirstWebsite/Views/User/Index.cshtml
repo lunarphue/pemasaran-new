@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MyFirstWebsite.Models.Users>
+
+@{
+    ViewBag.Title = "Index";
+    var username = User.Identity.Name;
+}
+
+<h2>Welcome, @username</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @*<a href="~/Views/User/Index.cshtml">~/Views/User/Index.cshtml</a>*@
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kecamatan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telpon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Faks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategori)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perusahaans.Nama)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kecamatan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telpon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Faks)
+        </td>
+        @if (item.Kategori.Equals("1"))
+        {
+            <td>Administrator</td>
+        }
+        else if (item.Kategori.Equals("2"))
+        {
+            <td>Account Executive</td>
+        }
+        else if (item.Kategori.Equals("3"))
+        {
+            <td>Assisten Account Executive</td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Perusahaans.Nama)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.User_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.User_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.User_Id })
+        </td>
+    </tr>
+}
+
+</table>

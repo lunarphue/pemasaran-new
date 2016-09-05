@@ -1,0 +1,140 @@
+﻿@model MyFirstWebsite.Models.Assigns
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @*@Html.AntiForgeryToken()*@
+    
+    <div class="form-horizontal">
+        <h4>Assign Pengecer</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Assign_Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Id, "AE / Assisten AE", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("User_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.User_Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aktif, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Aktif)*@
+                @Html.DropDownListFor(model => model.Aktif, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "Aktif"  },
+                       new { value = "0" , text = "Tidak Aktif" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.Aktif)
+                @Html.ValidationMessageFor(model => model.Aktif)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pengecer_Id, "Nama Pengecer", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Pengecer_Id", String.Empty)
+                @Html.ValidationMessageFor(model => model.Pengecer_Id)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Date_Edited, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date_Edited)
+                @Html.ValidationMessageFor(model => model.Date_Edited)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Time_Edited, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Time_Edited)
+                @Html.ValidationMessageFor(model => model.Time_Edited)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Urea, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Urea, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "YA"  },
+                       new { value = "0" , text = "TIDAK" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.Urea)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NPK, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NPK, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "YA"  },
+                       new { value = "0" , text = "TIDAK" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.NPK)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SP36, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SP36, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "YA"  },
+                       new { value = "0" , text = "TIDAK" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.SP36)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ZA, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ZA, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "YA"  },
+                       new { value = "0" , text = "TIDAK" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.ZA)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Organik, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Organik, new SelectList(
+                  new List<Object>{
+                       new { value = "1" , text = "YA"  },
+                       new { value = "0" , text = "TIDAK" }
+                    }, "value", "text", 2))
+                @Html.ValidationMessageFor(model => model.Organik)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

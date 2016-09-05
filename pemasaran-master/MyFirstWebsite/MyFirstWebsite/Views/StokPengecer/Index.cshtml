@@ -1,0 +1,145 @@
+﻿@model IEnumerable<MyFirstWebsite.Models.StokPengecers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index - Stok Pengecer</h2>
+<p>
+    Pengecer anda tidak ada?
+    @Html.ActionLink("Tambah Stok Pengecer", "Create")
+</p>
+
+@using (Html.BeginForm()){
+<table class="table">
+
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assign.Pengecer_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Edited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time_Edited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Urea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SP36)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assign.Aktif)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.StokPengecer_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assign.Pengecer_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Edited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time_Edited)
+        </td>
+        @if (item.Assign.Urea.Equals("1"))
+        {
+            <td>
+                @Html.EditorFor(modelItem => item.Urea)
+                @Html.ValidationMessageFor(model => item.Urea)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Urea)
+            </td>
+        }
+        @if (item.Assign.NPK.Equals("1"))
+        {
+            <td>
+                @Html.EditorFor(modelItem => item.NPK)
+                @Html.ValidationMessageFor(model => item.NPK)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.NPK)
+            </td>
+        }
+        @if (item.Assign.SP36.Equals("1"))
+        {
+            <td>
+                @Html.EditorFor(modelItem => item.SP36)
+                @Html.ValidationMessageFor(model => item.SP36)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.SP36)
+            </td>
+        }
+        @if (item.Assign.ZA.Equals("1"))
+        {
+            <td>
+                @Html.EditorFor(modelItem => item.ZA)
+                @Html.ValidationMessageFor(model => item.ZA)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.ZA)
+            </td>
+        }
+        @if (item.Assign.Organik.Equals("1"))
+        {
+            <td>
+                @Html.EditorFor(modelItem => item.Organik)
+                @Html.ValidationMessageFor(model => item.Organik)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Organik)
+            </td>
+        }
+        @if (item.Assign.Aktif.Equals("1")) { 
+            <td>Aktif</td>
+        }
+        else
+        {
+            <td>Tidak Aktif</td>
+        }      
+        
+       
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StokPengecer_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StokPengecer_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StokPengecer_Id })
+        </td>*@
+    </tr>
+    }
+    </table>
+    <input type="submit" value="save" />
+}
