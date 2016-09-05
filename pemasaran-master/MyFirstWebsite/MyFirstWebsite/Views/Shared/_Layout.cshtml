@@ -116,6 +116,7 @@
                             </span>
                         </a>
                     </li>
+
                     @if (HttpContext.Current.User.IsInRole("1") || HttpContext.Current.User.IsInRole("2"))
                     {
                     <li>
@@ -172,6 +173,7 @@
                         </a>
                     </li>
                     }
+                    @if (@User.Identity.IsAuthenticated) { 
                     <li class="last ">
                         <a href="@Url.Action("Index", "StokPengecer")">
                             <i class="fa fa-bar-chart-o"></i>
@@ -188,6 +190,7 @@
                             </span>
                         </a>
                     </li>
+                    }
                 </ul>
                 <!-- END SIDEBAR MENU -->
             </div>

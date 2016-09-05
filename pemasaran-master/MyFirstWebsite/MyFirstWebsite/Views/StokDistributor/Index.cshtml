@@ -19,6 +19,9 @@
             @Html.DisplayNameFor(model => model.DistributorAssigns.Distributor_Id)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.DistributorAssigns.User_Id)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Date_Edited)
         </th>
         <th>
@@ -53,7 +56,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.DistributorAssigns.Distributor_Id)
         </td>
-
+        <td>
+            @Html.DisplayFor(modelItem => item.DistributorAssigns.User_Id)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date_Edited)
         </td>

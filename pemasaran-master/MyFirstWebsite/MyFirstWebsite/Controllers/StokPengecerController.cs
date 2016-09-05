@@ -94,7 +94,7 @@ namespace MyFirstWebsite.Controllers
         // GET: /StokPengecers/Create
         public ActionResult Create()
         {
-            ViewBag.Assign_Id = new SelectList(db.Assigns, "Assign_Id", "Aktif");
+            ViewBag.Assign_Id = new SelectList(db.Assigns, "Assign_Id", "Pengecer_Id");
             return View();
         }
 

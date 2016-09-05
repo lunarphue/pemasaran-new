@@ -78,7 +78,10 @@ namespace MyFirstWebsite.Controllers
         // GET: /StokDistributors/Create
         public ActionResult Create()
         {
-            ViewBag.AssignDistributor_Id = new SelectList(db.DistributorAssigns, "DistributorAssign_Id", "Aktif");
+            //Claim sessionUsername = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+            //int sid = Convert.ToInt32(sessionUsername.Value);
+            //DistributorAssigns distributorassign = db.DistributorAssigns.Find(sid);
+            ViewBag.DistributorAssign_Id = new SelectList(db.DistributorAssigns, "DistributorAssign_Id", "Distributor_Id");
             return View();
         }
 
@@ -87,15 +90,34 @@ namespace MyFirstWebsite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="StokDistributor_Id,DistributorAssign_Id,Date_Edited,Time_Edited,Urea,NPK,SP36,ZA,Organik")] StokDistributors stokdistributor)
+        public ActionResult Create([Bind(Include="StokDistributor_Id,DistributorAssign_Id,Urea,NPK,SP36,ZA,Organik")] StokDistributors stokdistributor)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    db.StokDistributors.Add(stokdistributor);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            string timeToday = DateTime.Now.ToString("h:mm:ss tt");
+            string dateToday = DateTime.Now.ToString("M/dd/yyyy");
+            Claim sessionUsername = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+            string userName = sessionUsername.Value;
             if (ModelState.IsValid)
             {
-                db.StokDistributors.Add(stokdistributor);
+                var dbstokdistributor = db.StokDistributors.Create();
+                dbstokdistributor.DistributorAssign_Id = stokdistributor.DistributorAssign_Id;
+                dbstokdistributor.Urea = stokdistributor.Urea;
+                dbstokdistributor.NPK = stokdistributor.NPK;
+                dbstokdistributor.ZA = stokdistributor.ZA;
+                dbstokdistributor.SP36 = stokdistributor.SP36;
+                dbstokdistributor.Organik = stokdistributor.Organik;
+                dbstokdistributor.Date_Edited = dateToday;
+                dbstokdistributor.Edited_by = userName;
+                dbstokdistributor.Time_Edited = timeToday;
+                db.StokDistributors.Add(dbstokdistributor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.DistributorAssign_Id = new SelectList(db.DistributorAssigns, "DistributorAssign_Id", "Aktif", stokdistributor.DistributorAssign_Id);
             return View(stokdistributor);
         }
