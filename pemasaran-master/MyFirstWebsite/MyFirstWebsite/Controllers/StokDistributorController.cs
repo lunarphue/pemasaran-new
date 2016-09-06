@@ -18,8 +18,26 @@ namespace MyFirstWebsite.Controllers
         // GET: /StokDistributors/
         public ActionResult Index()
         {
-            var stokdistributors = db.StokDistributors.Include(s => s.DistributorAssigns);
-            return View(stokdistributors.ToList());
+            Claim sessionRole = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role);
+            string role = sessionRole.Value;
+            if (role.Equals("3"))
+            {
+                Claim sessionId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+                int sid = Convert.ToInt32(sessionId.Value);
+                var stokdistributors = db.StokDistributors.Include(s => s.DistributorAssigns).Where(s => s.DistributorAssigns.User_Id == sid);
+                return View(stokdistributors.ToList());
+            } else if (role.Equals("2"))
+            {
+                Claim sessionId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+                int sid = Convert.ToInt32(sessionId.Value);
+                var stokdistributors = db.StokDistributors.Include(s => s.DistributorAssigns).Where(s => s.DistributorAssigns.User_Id == sid || s.DistributorAssigns.User.Id_Atasan == sid);
+                return View(stokdistributors.ToList());
+            }
+            else
+            {
+                var stokdistributors = db.StokDistributors.Include(s => s.DistributorAssigns);
+                return View(stokdistributors.ToList());
+            }
         }
 
         [HttpPost]

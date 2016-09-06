@@ -18,9 +18,29 @@ namespace MyFirstWebsite.Controllers
         // GET: /StokPengecers/
         public ActionResult Index()
         {
-            var stokpengecers = db.StokPengecers.Include(s => s.Assign);
-            return View(stokpengecers.ToList());
-
+            Claim sessionRole = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role);
+            string role = sessionRole.Value;
+            if (role.Equals("3"))
+            {
+                Claim sessionId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+                int sid = Convert.ToInt32(sessionId.Value);
+                var stokpengecers = db.StokPengecers.Include(s => s.Assign).Where(s => s.Assign.User_Id == sid);
+                return View(stokpengecers.ToList());
+            }
+            else if (role.Equals("2"))
+            {
+                Claim sessionId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+                int sid = Convert.ToInt32(sessionId.Value);
+                var stokpengecers = db.StokPengecers.Include(s => s.Assign).Where(s => s.Assign.User_Id == sid || s.Assign.User.Id_Atasan == sid);
+                return View(stokpengecers.ToList());
+            }
+            else
+            {
+                Claim sessionId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Sid);
+                int sid = Convert.ToInt32(sessionId.Value);
+                var stokpengecers = db.StokPengecers.Include(s => s.Assign);
+                return View(stokpengecers.ToList());
+            }
         }
         [HttpPost]
         public ActionResult Index(FormCollection c)
